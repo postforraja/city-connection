@@ -26,48 +26,48 @@ import io.swagger.annotations.ApiParam;
 public class ConnectionController {
 	
 	private final Log LOG = LogFactory.getLog(getClass());
-	
+
 	@Autowired
 	private ConnectionService connectionService;
 	
-    @ApiOperation(value = "To find a connection between two cities",
-            notes = "Returns yes if cites connected otherwise returns no",
-            response = String.class)
-    @GetMapping("/connected")
-    public String isConnected(
-        @ApiParam(name = "origin", value = "Origin City name", required = true) @RequestParam String origin, 
-        @ApiParam(name = "destination", value = "Destination City name", required = true) @RequestParam String destination) {
+	@ApiOperation(value = "To find a connection between two cities",
+	    notes = "Returns yes if cites connected otherwise returns no",
+	    response = String.class)
+	@GetMapping("/connected")
+	public String isConnected(
+		@ApiParam(name = "origin", value = "Origin City name", required = true) @RequestParam String origin, 
+		@ApiParam(name = "destination", value = "Destination City name", required = true) @RequestParam String destination) {
 
-      if(StringUtils.isEmpty(origin) || StringUtils.isEmpty(destination)) {
-        LOG.info(String.format("City is Empty: %s, %s", origin, destination));
-        return ConnectionConstants.NO;
-      }
+		if(StringUtils.isEmpty(origin) || StringUtils.isEmpty(destination)) {
+		LOG.info(String.format("City is Empty: %s, %s", origin, destination));
+		return ConnectionConstants.NO;
+		}
 
-      return connectionService.isConnected(origin.toLowerCase(), "", destination.toLowerCase(), new HashSet<>(Collections.singleton(origin)));
-    }
-    
-    @ApiOperation(value = "To find a connection between two cities with a maximum of one stop",
-            notes = "Returns yes if cites connected otherwise returns no",
-            response = String.class)
-    @GetMapping("/connectedWithOneStop")
-    public String isConnectedWithOneStop(
-        @ApiParam(name = "origin", value = "Origin City name", required = true) @RequestParam String origin, 
-        @ApiParam(name = "destination", value = "Destination City name", required = true) @RequestParam String destination) {
+		return connectionService.isConnected(origin.toLowerCase(), "", destination.toLowerCase(), new HashSet<>(Collections.singleton(origin)));
+	}
 
-      if(StringUtils.isEmpty(origin) || StringUtils.isEmpty(destination)) {
-        LOG.info(String.format("City is Empty: %s, %s", origin, destination));
-        return ConnectionConstants.NO;
-      }
+	@ApiOperation(value = "To find a connection between two cities with a maximum of one stop",
+	    notes = "Returns yes if cites connected otherwise returns no",
+	    response = String.class)
+	@GetMapping("/connectedWithOneStop")
+	public String isConnectedWithOneStop(
+		@ApiParam(name = "origin", value = "Origin City name", required = true) @RequestParam String origin, 
+		@ApiParam(name = "destination", value = "Destination City name", required = true) @RequestParam String destination) {
 
-      return connectionService.isConnectedWithOneStop(origin, destination);
-    }
-    
-    @ApiOperation(value = "To list all the possible connections between the cities",
-            notes = "Returns HTML as a String",
-            response = String.class)
-    @GetMapping("/")
-    public String availableConnections() {
-          return connectionService.availableConnections();
-    }
+		if(StringUtils.isEmpty(origin) || StringUtils.isEmpty(destination)) {
+		LOG.info(String.format("City is Empty: %s, %s", origin, destination));
+		return ConnectionConstants.NO;
+		}
+
+		return connectionService.isConnectedWithOneStop(origin, destination);
+	}
+
+	@ApiOperation(value = "To list all the possible connections between the cities",
+	    notes = "Returns HTML as a String",
+	    response = String.class)
+	@GetMapping("/")
+	public String availableConnections() {
+		return connectionService.availableConnections();
+	}
 	
 }
