@@ -7,9 +7,13 @@ List of roads is available in 'city.txt' file. The file contains a list of city 
 # For Example:
 
 Boston, New York
+
 Philadelphia, Newark
+
 Newark, Boston
+
 Trenton, Albany
+
 Edison, Boston
 
 # To Build the application: Check out the project and run the below command
