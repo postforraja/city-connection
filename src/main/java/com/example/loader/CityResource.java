@@ -79,8 +79,8 @@ public class CityResource {
         LOG.info(String.format("Road Map => City: %s - %s", origin, roadMap.get(origin).toString()));  
     }
 
-	public Map<String, List<String>> getRoadMap() {
-		    return roadMap;
-	}    
+    public Map<String, List<String>> getRoadMap() {
+	return roadMap;
+    }    
 
 }
